@@ -1,0 +1,11 @@
+export type Role = 'coordinator' | 'guide' | 'student';
+export type User = { id: string; name: string; email: string; role: Role; passwordHash: string; domain?: string };
+export type PublicUser = Omit<User, 'passwordHash'>;
+export type Team = { id: string; domain: string; guideId: string; members: string[]; created: string };
+export type Submission = { id: string; teamId: string; studentId: string; kind: string; title: string; date: string; description: string; status: 'Submitted' | 'Reviewed' };
+export type Diary = { id: string; studentId: string; date: string; title: string; entry: string };
+export type Remark = { id: string; teamId: string; guideId: string; kind: string; text: string; rating: number; date: string };
+export type Attendance = { id: string; studentId: string; date: string; status: 'Present' | 'Absent' | 'Leave' };
+export type Database = { users: User[]; teams: Team[]; submissions: Submission[]; diaries: Diary[]; remarks: Remark[]; attendance: Attendance[] };
+export type PublicDatabase = Omit<Database, 'users'> & { users: PublicUser[] };
+export type SessionUser = Pick<User, 'id' | 'name' | 'role'>;
